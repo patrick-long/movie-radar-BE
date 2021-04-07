@@ -13,7 +13,7 @@ const app = express();
 // TODO: require and config .env file
 require('dotenv').config();
 // TOOD: require database module
-// require('./config/database');
+require('./config/database');
 
 
 // mount middleware using app.use()
@@ -23,7 +23,7 @@ app.use(cors());
 
 
 // mount routes with app.use()
-app.use('/', require('./routes/api/movies'));
+app.use('/api/movies', require('./routes/api/movies'));
 
 
 // tell the app to listen on port 3000
