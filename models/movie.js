@@ -12,14 +12,6 @@ const reviewSchema = new Schema({
 
 const movieSchema = new Schema({
     apiId: Number,
-    title: String,
-    genres: [ String ], 
-    poster: String,
-    background: String, 
-    overview: String,
-    release: String,
-    runTime: Number, 
-    trailerKey: String,
     reviews: [ reviewSchema ],
     stars: Number, 
 },  {
