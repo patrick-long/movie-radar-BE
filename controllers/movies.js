@@ -1,12 +1,46 @@
 const Movie = require('../models/movie');
 const axios = require('axios');
 
-
-const popular = async (req, res, next) => {
+const popular1 = async (req, res, next) => {
     try {
-        const movies = await axios.get(`${process.env.API_POPULAR_URL}`).then(response => (response.data));
+        const movies = await axios.get(`${process.env.API_POPULAR_URL}1`).then(response => (response.data));
         res.status(200).json(movies);
-        console.log(movies);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const popular2 = async (req, res, next) => {
+    try {
+        const movies = await axios.get(`${process.env.API_POPULAR_URL}2`).then(response => (response.data));
+        res.status(200).json(movies);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const popular3 = async (req, res, next) => {
+    try {
+        const movies = await axios.get(`${process.env.API_POPULAR_URL}3`).then(response => (response.data));
+        res.status(200).json(movies);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const popular4 = async (req, res, next) => {
+    try {
+        const movies = await axios.get(`${process.env.API_POPULAR_URL}4`).then(response => (response.data));
+        res.status(200).json(movies);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const popular5 = async (req, res, next) => {
+    try {
+        const movies = await axios.get(`${process.env.API_POPULAR_URL}5`).then(response => (response.data));
+        res.status(200).json(movies);
     } catch (error) {
         console.log(error);
     }
@@ -15,7 +49,6 @@ const popular = async (req, res, next) => {
 const upcoming = async (req, res, next) => {
     try {
         const movies = await axios.get(`${process.env.API_UPCOMING_URL}`).then(response => (response.data));
-        console.log(movies);
     } catch (error) {
         console.log(error);
     }
@@ -54,7 +87,11 @@ const create = async (req, res) => {
 module.exports = {
     index,
     create,
-    popular,
-    upcoming,
-    search
+    popular1,
+    popular2,
+    popular3,
+    popular4,
+    popular5,
+    // upcoming,
+    // search
 }
