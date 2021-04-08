@@ -54,10 +54,10 @@ const upcoming = async (req, res, next) => {
     }
 }
 
-const search = async (req, res, next) => {
+const show = async (req, res, next) => {
     try {
-        const movies = await axios.get(`${process.env.API_SEARCH_URL}`).then(response => (response.data));
-        console.log(movies);
+        const movie = await axios.get(`https://api.themoviedb.org/3/movie/527774${process.env.API_ID_URL}`).then(response => (response.data));
+        console.log(movie);
     } catch (error) {
         console.log(error);
     }
@@ -93,5 +93,5 @@ module.exports = {
     popular4,
     popular5,
     // upcoming,
-    // search
+    show
 }
