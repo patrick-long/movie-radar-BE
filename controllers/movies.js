@@ -1,4 +1,5 @@
 const Movie = require('../models/movie');
+const Genre = require('../models/genre');
 const axios = require('axios');
 
 const index = async (req, res) => {
@@ -25,7 +26,7 @@ const create = async (req, res) => {
 
 const genresIndex = async (req, res) => {
     try {
-        const movies = await Movie.find({});
+        const movies = await Genre.find({});
         res.status(200).json(movies); // sends an HTTP response with json data
     } catch (error) {
         console.log(error);
@@ -35,7 +36,10 @@ const genresIndex = async (req, res) => {
 
 const genresCreate = async (req, res) => {
     try {
-        const genreSearch = await axios.get(process.env.API_GENRES_URL).then(response => console.log(response));
+        const genreSearch = await axios.get(process.env.API_GENRES_URL).then(response => response.data.genres);
+        const specificGenreSearch = genreSearch.find(genre => genre.name.toLowerCase() === req.body.genre);
+        const movies = await axios.get(`${process.env.GENRES_SEARCH_URL}${specificGenreSearch.id}`).then(response => response.data.results);
+        const specificMovies = movies.map(async movie => await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}${process.env.API_ID_URL}`).then(response => Genre.create(response.data)));
         genresIndex(req, res);
     } catch (error) {
         console.log(error);
