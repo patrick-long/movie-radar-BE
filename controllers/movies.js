@@ -7,7 +7,6 @@ const index = async (req, res) => {
         const movies = await Movie.find({});
         res.status(200).json(movies); // sends an HTTP response with json data
     } catch (error) {
-        console.log(error);
         res.status(400).json({ error: 'something went wrong' })
     }
 }
@@ -19,8 +18,7 @@ const create = async (req, res) => {
         await Movie.create(specificMovieSearch);
         index(req, res);
     } catch (error) {
-        console.log(error)
-        res.send(error);
+        res.send('Oops! Something went wrong.');
     }
 }
 
@@ -29,7 +27,6 @@ const genresIndex = async (req, res) => {
         const movies = await Genre.find({});
         res.status(200).json(movies); // sends an HTTP response with json data
     } catch (error) {
-        console.log(error);
         res.status(400).json({ error: 'something went wrong' })
     }
 }
@@ -42,7 +39,7 @@ const genresCreate = async (req, res) => {
         const specificMovies = movies.map(async movie => await axios.get(`https://api.themoviedb.org/3/movie/${movie.id}${process.env.API_ID_URL}`).then(response => Genre.create(response.data)));
         genresIndex(req, res);
     } catch (error) {
-        console.log(error);
+        res.send('Oops! Something went wrong.');
     }
 }
 
